@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from "@angular/router";
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -8,19 +8,18 @@ import { Router, RouterOutlet } from "@angular/router";
   styleUrl: './layout.css',
 })
 export class Layout {
-
-  loggedInData:any;
+  loggedInData: any;
 
   router = inject(Router);
 
-  constructor(){
+  constructor() {
     const localData = localStorage.getItem('batch32');
-    if(localData != null){
-      this.loggedInData = JSON.parse(localData)
+    if (localData != null) {
+      this.loggedInData = JSON.parse(localData);
     }
   }
 
-  onLogOff(){
+  onLogOff() {
     localStorage.removeItem('batch32');
     this.router.navigate(['login']);
   }
