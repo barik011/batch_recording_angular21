@@ -40,3 +40,6 @@
       transform: scale(1.05);
       background: linear-gradient(135deg, #6a11cb, #2575fc);
     }
+.border-red{
+  border:1px solid #ff0000;
+}
