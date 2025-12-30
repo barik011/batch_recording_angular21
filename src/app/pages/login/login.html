@@ -1,15 +1,30 @@
 <div class="parent-wrapper">
 <div class="login-card">
     <h3>Welcome Back</h3>
-    <form>
+    <form #loginForm="ngForm">
       <div class="mb-3">
         <label for="email" class="form-label">Username</label>
-        <input type="text" class="form-control" [(ngModel)]="loginObj.email" name="email" placeholder="Enter username">
-      </div>
+        <input type="text" class="form-control" [ngClass]="{'borderRed':email.touched,'borderRed': email.errors?.['required']}" required pattern="^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$" #email="ngModel" [(ngModel)]="loginObj.email" name="email" placeholder="Enter username">
+        @if(email.touched){
+            @if(email.errors?.['required']){
+                 <span class="text-danger">Username field is required</span>
+            }
+            @if(email.errors?.['pattern']){
+                <span class="text-danger">Email id not valid</span>
+            }
+        }
+        
+        
+    </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" [(ngModel)]="loginObj.password" name="password" placeholder="Enter password">
-      </div>
+        <input type="password" class="form-control" required #password="ngModel" [(ngModel)]="loginObj.password" name="password" placeholder="Enter password">
+        @if(password.touched){
+            @if(password.errors?.['required']){
+                 <span class="text-danger">Password field is required</span>
+            }
+        }  
+    </div>
       <button type="submit" (click)="onLogin()" class="btn btn-login w-100">Login</button>
     </form>
 </div>
