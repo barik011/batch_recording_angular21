@@ -1,0 +1,26 @@
+ <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" >Logo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+            <a class="nav-link" >Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Link</a>
+        </li>
+      </ul>
+      <form class="d-flex gap-2 align-items-center">  
+        <div class="text-white">{{loggedInData.fullName}}</div>  
+        <button class="btn btn-primary" (click)="onLogOff()" type="button">Logoff</button>
+      </form>
+    </div>
+  </div>
+</nav> 
+<router-outlet></router-outlet>
