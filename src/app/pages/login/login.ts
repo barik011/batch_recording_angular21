@@ -4,6 +4,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginServices } from '../../services/login-services';
+import { GlobalConstant } from '../../core/constants/Global.constant';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class Login {
       this.logServ.onLoginServ(this.loginObj).subscribe({
         next: (result: any) => {
           debugger;
-          localStorage.setItem('batch32', JSON.stringify(result.data));
+          localStorage.setItem(GlobalConstant.LOCAL_KEY_LOGIN, JSON.stringify(result.data));
           this.router.navigateByUrl('dashboard');
         },
         error: (err: any) => {
