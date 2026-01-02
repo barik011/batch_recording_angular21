@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginServices } from '../../services/login-services';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,10 @@ import { Router } from '@angular/router';
 export class Login {
   http = inject(HttpClient);
   router = inject(Router);
+
+  logServ = inject(LoginServices)
+
+
   loginObj: any = {
     email: '',
     password: '',
@@ -20,9 +25,7 @@ export class Login {
 
   onLogin() {
     debugger;
-    this.http
-      .post('https://feestracking.freeprojectapi.com/api/BatchUser/login', this.loginObj)
-      .subscribe({
+      this.logServ.onLoginServ(this.loginObj).subscribe({
         next: (result: any) => {
           debugger;
           localStorage.setItem('batch32', JSON.stringify(result.data));

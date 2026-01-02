@@ -8,6 +8,7 @@ export class LoginServices {
   loginApiUrl='https://feestracking.freeprojectapi.com/api/';
   http = inject(HttpClient)
     onLoginServ(obj:any){
-      this.http.post(`${this.loginApiUrl}'BatchUser/login'`, obj);
+      debugger;
+      return this.http.post(`${this.loginApiUrl}BatchUser/login`, obj);
     }
 }
