@@ -1,26 +1,65 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm">
     <div class="container-fluid">
-        <a class="navbar-brand">Logo</a>
+        <a class="navbar-brand"><i class="fa-solid fa-blog"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link">Link</a>
+                    <a class="nav-link" [routerLink]="'/dashboard'">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Link</a>
+                    <a class="nav-link" [routerLink]="'/batch'">Batch</a>
                 </li>
             </ul>
             <form class="d-flex gap-2 align-items-center">
-                <div class="text-white">{{loggedInData.fullName}}</div>
+                <div>{{loggedInData.fullName}}</div>
                 <button class="btn btn-success" (click)="onLogOff()" type="button">Logout</button>
             </form>
         </div>
     </div>
 </nav>
+<!-- SIDEBAR -->
+<!-- <aside class="sidebar" [ngClass]="toggleLeftPanel?'sidebar':'sidebar-collepse'">
+  <div class="sidebar-header">
+   @if(toggleLeftPanel){
+    <span class="logo-text"> MyAdmin </span> <button for="sidebarToggle" (click)="onToggleLeftPanel()" class="hamburger"><i class="fa-solid fa-xmark"></i></button>
+   }
+   @else {
+    <button for="sidebarToggle" (click)="onToggleLeftPanel()" class="hamburger"><i class="fa-solid fa-bars"></i></button>
+   } 
+    
+  </div>
+
+  <div class="sidebar-menu">
+    <div class="menu-item active">
+      <i class="fa-solid fa-house"></i>
+      <span>Dashboard</span>
+    </div>
+
+    <div class="menu-item">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Batch</span>
+    </div>
+
+    <details class="menu-accordion">
+      <summary>
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+        <i class="fa-solid fa-chevron-down arrow"></i>
+      </summary>
+      <div class="submenu">
+        <a href="#">Profile</a>
+        <a href="#">Users</a>
+        <a href="#">Permissions</a>
+      </div>      
+    </details>
+  </div>
+
+  <div class="sidebar-footer">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span>Logout</span>
+  </div>
+</aside> -->
 <router-outlet></router-outlet>

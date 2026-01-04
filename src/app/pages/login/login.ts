@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginServices } from '../../services/login-services';
+import { LoginServices } from '../../core/services/login-services';
 import { GlobalConstant } from '../../core/constants/Global.constant';
 
 @Component({

@@ -1,15 +1,17 @@
+import { NgStyle, NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, RouterLinkWithHref } from '@angular/router';
+
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NgStyle, NgClass, RouterLinkWithHref],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
 export class Layout {
   loggedInData: any;
-
+  toggleLeftPanel:boolean=true;
   router = inject(Router);
 
   constructor() {
@@ -22,5 +24,9 @@ export class Layout {
   onLogOff() {
     localStorage.removeItem('batch32');
     this.router.navigate(['login']);
+  }
+
+  onToggleLeftPanel(){
+    this.toggleLeftPanel=!this.toggleLeftPanel;
   }
 }
