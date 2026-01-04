@@ -20,10 +20,11 @@ export class BatchMaster implements OnInit {
   @ViewChild('batchModal') batchModal!:ElementRef;
   toggleView:boolean=true;
   batchList = signal<any[]>([]);
+  batchById = signal<any>({});
   http = inject(HttpClient);
   batchServ = inject(BatchServices);
 
-  newBatchObj: BatchModel= new BatchModel()
+  newBatchObj: BatchModel= new BatchModel() 
 
   ngOnInit(): void {
     this.loadAllBatches();
@@ -34,8 +35,9 @@ export class BatchMaster implements OnInit {
   openModal(){
     this.batchModal.nativeElement.style.display = 'block';
   }
-  closeModal(){
+  closeModal(){    
     this.batchModal.nativeElement.style.display = 'none';
+    //this.newBatchObj = new BatchModel();
   }
   resetForm(){
     this.newBatchObj = new BatchModel();
@@ -66,4 +68,32 @@ export class BatchMaster implements OnInit {
     })
   }
 
+  onEditBatch(id:number){
+    debugger;
+    this.batchServ.getBatchByIdService(id).subscribe({
+      next:(result:IAPIResponse)=>{
+        debugger;
+        this.newBatchObj = result.data
+        //this.batchById.set(result.data);
+        this.openModal();
+      },
+      error:(err:IAPIResponse)=>{
+        alert(err.message);
+      }
+    })
+  }
+  updateBatchById(){
+    this.batchServ.updateBatchService(this.newBatchObj).subscribe({
+      next:(result:IAPIResponse)=>{
+        debugger;
+        this.batchList.set(result.data);
+        alert(result.message);
+        this.resetForm();
+        this.closeModal();        
+      },
+      error:(err:IAPIResponse)=>{
+        alert(err.message);
+      }
+    })
+  }
 }

@@ -16,4 +16,10 @@ export class BatchServices {
   addBatchService(obj:BatchModel):Observable<IAPIResponse>{
     return this.http.post<IAPIResponse>(environment.API_URL + GlobalConstant.API_END_POINTS.BATCHES,obj)
   }
+  getBatchByIdService(id:number){
+    return this.http.get<IAPIResponse>(environment.API_URL + GlobalConstant.API_END_POINTS.BATCHES+'/'+id);
+  }
+  updateBatchService(obj:BatchModel):Observable<IAPIResponse>{
+    return this.http.put<IAPIResponse>(environment.API_URL + GlobalConstant.API_END_POINTS.BATCHES+'/'+obj.batchId,obj)
+  }
 }

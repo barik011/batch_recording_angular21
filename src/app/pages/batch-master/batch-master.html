@@ -7,7 +7,7 @@
         <i class="fa-solid fa-layer-group me-2"></i> Batch Management
       </h4>
       <div class="d-flex gap-2">
-        <button class="btn btn-light btn-icon" (click)="onToggleView()" [title]="toggleView ?'Table View':'Grid View'">
+        <button class="btn btn-light btn-icon" (click)="onToggleView()" [title]="toggleView ?'Card View':'Table View'">
           <i class="fa-solid " [ngClass]="toggleView ?'fa-grip':'fa-table'"></i>
         </button>
         <button class="btn btn-warning ms-2" (click)="openModal()">
@@ -43,7 +43,7 @@
                 [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive?'Active':'InActive'}}</span>
             </td>
             <td class="text-center action-icons">
-              <i class="fa-solid fa-pen text-primary"></i>
+              <i class="fa-solid fa-pen text-primary" (click)="onEditBatch(item.batchId)"></i>
               <i class="fa-solid fa-trash text-danger"></i>
             </td>
           </tr>
@@ -142,9 +142,19 @@
 
       <div class="modal-footer">
         <button class="btn btn-secondary" (click)="resetForm()">Reset</button>
-        <button class="btn btn-primary" (click)="onSaveBatch()">
+        @if (newBatchObj.batchId==0) {
+          <button class="btn btn-primary" (click)="onSaveBatch()">
           <i class="fa-solid fa-floppy-disk me-1"></i> Save
         </button>
+        }
+        @else {
+                
+        <button class="btn btn-warning" (click)="updateBatchById()">
+          <i class="fa-solid fa-floppy-disk me-1"></i> Update
+        </button>
+        }
+  
+        
       </div>
     </div>
   </div>
