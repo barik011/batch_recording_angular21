@@ -108,39 +108,41 @@
         <form >
           <div class="row g-3">
             <div class="col-12">
-              <label for="" class="form-label">Batch Name</label>
-              <input type="text" class="form-control"  placeholder="Enter batch name">
+              <label for="batchName" class="form-label">Batch Name</label>
+              <input type="text" name="batchName" class="form-control" [(ngModel)]="newBatchObj.batchName" placeholder="Enter batch name">
+            </div>
+
+            
+
+            <div class="col-12">
+              <label class="form-label" for="startDate">Start Date</label>
+              <input type="datetime-local" name="startDate" class="form-control" [(ngModel)]="newBatchObj.startDate">
             </div>
 
             <div class="col-12">
-              <label class="form-label">Status</label>
-              <select class="form-select">
-                <option>Active</option>
-                <option>Inactive</option>
-              </select>
-            </div>            
-
-            <div class="col-12">
-              <label class="form-label">Start Date</label>
-              <input type="datetime-local" class="form-control">
+              <label class="form-label" for="endDate">End Date</label>
+              <input type="datetime-local" name="endDate" class="form-control" [(ngModel)]="newBatchObj.endDate">
             </div>
 
             <div class="col-12">
-              <label class="form-label">End Date</label>
-              <input type="datetime-local" class="form-control">
+              <label class="form-label" for="description">Description</label>
+              <textarea class="form-control" name="description" [(ngModel)]="newBatchObj.description" rows="3"></textarea>
             </div>
 
             <div class="col-12">
-              <label class="form-label">Description</label>
-              <textarea class="form-control" rows="3"></textarea>
+              <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input"  name="isActive" [(ngModel)]="newBatchObj.isActive" />
+                <label class="form-check-label" for="isActive">Status</label>
+              </div>
             </div>
+
           </div>
         </form>
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancel</button>
-        <button class="btn btn-primary">
+        <button class="btn btn-secondary" (click)="resetForm()">Reset</button>
+        <button class="btn btn-primary" (click)="onSaveBatch()">
           <i class="fa-solid fa-floppy-disk me-1"></i> Save
         </button>
       </div>

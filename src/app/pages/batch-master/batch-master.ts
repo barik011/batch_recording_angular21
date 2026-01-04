@@ -3,11 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { GlobalConstant } from '../../core/constants/Global.constant';
+import { FormsModule } from '@angular/forms';
+import { BatchServices } from '../../core/services/batch/batch-services';
+import { BatchModel } from '../../core/models/classes/Batch.Model';
+import { IAPIResponse } from '../../core/models/interfaces/Common.Model';
 
 
 @Component({
   selector: 'app-batch-master',
-  imports: [NgClass],
+  imports: [FormsModule, NgClass],
   templateUrl: './batch-master.html',
   styleUrl: './batch-master.css',
 })
@@ -17,17 +21,10 @@ export class BatchMaster implements OnInit {
   toggleView:boolean=true;
   batchList = signal<any[]>([]);
   http = inject(HttpClient);
+  batchServ = inject(BatchServices);
 
-  newBatchObj:any={
-      batchId: 0,
-      batchName: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-      isActive: true,
-      createdAt: "",
-      updatedAt: ""
-  }
+  newBatchObj: BatchModel= new BatchModel()
+
   ngOnInit(): void {
     this.loadAllBatches();
   }
@@ -40,7 +37,9 @@ export class BatchMaster implements OnInit {
   closeModal(){
     this.batchModal.nativeElement.style.display = 'none';
   }
-
+  resetForm(){
+    this.newBatchObj = new BatchModel();
+  }
   loadAllBatches(){
     debugger;
     this.http.get(environment.API_URL + GlobalConstant.API_END_POINTS.BATCHES).subscribe({
@@ -49,6 +48,20 @@ export class BatchMaster implements OnInit {
       },
       error:(err:any)=>{
         alert(err.error.message);
+      }
+    })
+  }
+  onSaveBatch(){
+    this.batchServ.addBatchService(this.newBatchObj).subscribe({
+      next:(result:IAPIResponse)=>{
+        debugger;
+        this.batchList.set(result.data);
+        alert(result.message);
+        this.resetForm();
+        this.closeModal();        
+      },
+      error:(err:IAPIResponse)=>{
+        alert(err.message);
       }
     })
   }

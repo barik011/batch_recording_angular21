@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
-import { GlobalConstant } from '../constants/Global.constant';
+import { environment } from '../../../../environments/environment.development';
+import { GlobalConstant } from '../../constants/Global.constant';
 
 @Injectable({
   providedIn: 'root',
