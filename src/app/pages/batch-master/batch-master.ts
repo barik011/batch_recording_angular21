@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { JsonPipe, NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
@@ -11,7 +11,7 @@ import { IAPIResponse } from '../../core/models/interfaces/Common.Model';
 
 @Component({
   selector: 'app-batch-master',
-  imports: [FormsModule, NgClass],
+  imports: [FormsModule, NgClass,JsonPipe],
   templateUrl: './batch-master.html',
   styleUrl: './batch-master.css',
 })
@@ -20,7 +20,7 @@ export class BatchMaster implements OnInit {
   @ViewChild('batchModal') batchModal!:ElementRef;
   toggleView:boolean=true;
   batchList = signal<any[]>([]);
-  batchById = signal<any>({});
+  batchID = signal<any>({});
   http = inject(HttpClient);
   batchServ = inject(BatchServices);
 
@@ -68,13 +68,16 @@ export class BatchMaster implements OnInit {
     })
   }
 
-  onEditBatch(id:number){
+  onEditBatch(item:BatchModel){
     debugger;
-    this.batchServ.getBatchByIdService(id).subscribe({
+    this.openModal();
+    this.newBatchObj = item;
+    this.batchServ.getBatchByIdService(item).subscribe({
       next:(result:IAPIResponse)=>{
         debugger;
         this.newBatchObj = result.data
-        //this.batchById.set(result.data);
+        //Object.assign(this.newBatchObj, result.data);
+        this.batchID.set(result.data.batchId);
         this.openModal();
       },
       error:(err:IAPIResponse)=>{
@@ -89,9 +92,22 @@ export class BatchMaster implements OnInit {
         this.batchList.set(result.data);
         alert(result.message);
         this.resetForm();
-        this.closeModal();        
+        this.closeModal(); 
+        this.loadAllBatches();   
       },
       error:(err:IAPIResponse)=>{
+        alert(err.message);
+      }
+    })
+  }
+
+
+  onDeleteBatch(id:number){
+    this.batchServ.deleteBatchService(id).subscribe({
+      next:(result:IAPIResponse)=>{
+        alert('batch deleted')
+      },
+       error:(err:IAPIResponse)=>{
         alert(err.message);
       }
     })

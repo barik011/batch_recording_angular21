@@ -43,8 +43,8 @@
                 [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive?'Active':'InActive'}}</span>
             </td>
             <td class="text-center action-icons">
-              <i class="fa-solid fa-pen text-primary" (click)="onEditBatch(item.batchId)"></i>
-              <i class="fa-solid fa-trash text-danger"></i>
+              <i class="fa-solid fa-pen text-primary" (click)="onEditBatch(item)"></i>
+              <i class="fa-solid fa-trash text-danger" (click)="onDeleteBatch(item.batchId)"></i>
             </td>
           </tr>
           }
@@ -100,19 +100,20 @@
         <h5 class="modal-title">
           <i class="fa-solid fa-clipboard-list me-2"></i> Batch Form
         </h5>
+        @if(batchID()!=0){
+          {{batchID() | json}}
+        }
         <button class="btn-close" (click)="closeModal()" data-bs-dismiss="modal">
         </button>
       </div>
 
       <div class="modal-body">
-        <form >
+        <form>
           <div class="row g-3">
             <div class="col-12">
               <label for="batchName" class="form-label">Batch Name</label>
               <input type="text" name="batchName" class="form-control" [(ngModel)]="newBatchObj.batchName" placeholder="Enter batch name">
-            </div>
-
-            
+            </div>            
 
             <div class="col-12">
               <label class="form-label" for="startDate">Start Date</label>

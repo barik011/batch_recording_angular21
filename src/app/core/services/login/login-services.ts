@@ -11,6 +11,6 @@ export class LoginServices {
   http = inject(HttpClient)
     onLoginServ(obj:any){
       debugger;
-      return this.http.post(environment.API_URL + GlobalConstant.API_END_POINTS.BATCH_USER_LOGIN, obj);
+      return this.http.post(environment.API_URL+GlobalConstant.API_END_POINTS.BATCH_USER_LOGIN, obj);
     }
 }
