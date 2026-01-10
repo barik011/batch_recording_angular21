@@ -7,7 +7,9 @@ export const GlobalConstant = {
         BATCH_USER_LOGIN:'BatchUser/login',
         BATCH_SESSIONS:'BatchSessions/by-batch/',
 
-        CANDIDATES:'Candidates'
+        CANDIDATES:'Candidates',
+        BATCH_ENROLLMENT:'BatchEnrollments',
+        GET_ALL_ENROLLMENT:'GetAllEnrollment',
     }
     
 }

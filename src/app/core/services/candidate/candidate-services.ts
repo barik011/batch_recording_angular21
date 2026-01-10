@@ -25,5 +25,8 @@ export class CandidateServices {
   updateCandidateServ(obj:CandidateModel):Observable<IAPIResponse>{
     return this.http.put<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.CANDIDATES+'/'+obj.candidateId,obj);
   }
+  deleteCandidateServ(id:number):Observable<IAPIResponse>{
+    return this.http.delete<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.CANDIDATES+'/'+id);
+  }
   
 }

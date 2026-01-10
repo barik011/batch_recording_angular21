@@ -93,7 +93,20 @@ candicateForm(){
       }
     })
   }
-
+onDeleteCandidate(id:number){
+  const isDelete = confirm('Are you sure to delete!');
+  if(isDelete){
+    this.candServ.deleteCandidateServ(id).subscribe({
+      next:(result:IAPIResponse)=>{
+        this.loadCandidates();
+      },
+      error:(err:IAPIResponse)=>{
+        alert('Some API issue');
+      }
+    })
+  }
+  
+}
 openModal(){
     this.candidateModal.nativeElement.style.display='block';
   }

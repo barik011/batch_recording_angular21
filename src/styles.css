@@ -1,3 +1,189 @@
 .form-label {
     margin-bottom: .1rem;
 }
+
+#sidebarToggle { display: none; }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 260px;
+      height: 100vh;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      transition: width .3s ease;
+      z-index: 1000;
+    }
+
+    #sidebarToggle:checked ~ .sidebar {
+      width: 80px;
+    }
+
+    .sidebar-header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      background: linear-gradient(135deg,#0d6efd,#4c1d95);
+    }
+
+    .hamburger {
+      cursor: pointer;
+      font-size: 20px;
+      margin-right: 12px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 600;
+      transition: opacity .3s;
+    }
+
+    #sidebarToggle:checked ~ .sidebar .logo-text {
+      opacity: 0;
+    }
+
+    .sidebar-menu {
+      flex: 1;
+      padding: 15px;
+    }
+
+    .menu-item, summary {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: background .3s;
+    }
+
+    .menu-item:hover, summary:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    .menu-item i, summary i {
+      width: 28px;
+      text-align: center;
+    }
+
+    .menu-item span, summary span {
+      transition: opacity .3s;
+    }
+
+    #sidebarToggle:checked ~ .sidebar span {
+      opacity: 0;
+    }
+
+    details summary {
+      list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .submenu {
+      padding-left: 42px;
+    }
+
+    .submenu a {
+      display: block;
+      color: #cbd5f5;
+      text-decoration: none;
+      padding: 6px 0;
+      font-size: 14px;
+    }
+
+    .submenu a:hover { color: #fff; }
+
+    .sidebar-footer {
+      padding: 15px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+
+    /* ---------- MAIN ---------- */
+    .main-content {
+      margin-left: 260px;
+      padding: 24px;
+      transition: margin-left .3s ease;
+    }
+
+    #sidebarToggle:checked ~ .main-content {
+      margin-left: 80px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg,#0d6efd,#4c1d95);
+      color: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      margin-bottom: 25px;
+    }
+
+    /* ---------- TABLE & CARDS ---------- */
+    .card {
+      border-radius: 14px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.15);
+    }
+
+    .action-icons i {
+      cursor: pointer;
+      margin-right: 10px;
+      transition: transform .2s ease;
+    }
+
+    .action-icons i:hover {
+      transform: scale(1.2);
+    }
+
+    /* ---------- RIGHT PANEL MODAL ---------- */
+    /* Dark + blur overlay */
+  .modal.right-panel {   
+    backdrop-filter: blur(6px);
+    background-color: rgba(15, 23, 42, 0.3);
+  }
+    .modal.right-panel .modal-dialog {
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    max-width:400px;
+    width: 100%;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    
+  }
+.modal.right-panel .modal-dialog {
+    transform: translateX(0);
+    animation: slideDown 0.4s ease;
+  }
+
+  /* Modal content polish */
+
+  .modal.right-panel .modal-content {
+    height: 100%;
+    border-radius: 0;
+    box-shadow: -15px 0 40px rgba(0,0,0,0.35);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateX(400px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
