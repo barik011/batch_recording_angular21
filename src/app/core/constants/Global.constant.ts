@@ -5,7 +5,9 @@ export const GlobalConstant = {
     API_END_POINTS:{
         BATCHES:'Batches',
         BATCH_USER_LOGIN:'BatchUser/login',
-        BATCH_SESSIONS:'BatchSessions/by-batch/'
+        BATCH_SESSIONS:'BatchSessions/by-batch/',
+
+        CANDIDATES:'Candidates'
     }
     
 }
