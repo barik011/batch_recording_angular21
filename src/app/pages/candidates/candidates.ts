@@ -68,6 +68,32 @@ candicateForm(){
     })
   }
 
+  onEditCandidate(id:number){
+    this.candServ.getCandidateByIdServ(id).subscribe({
+      next:(result:IAPIResponse)=>{
+        this.newCandidatehObj.patchValue(result.data);
+        this.openModal();
+      },
+      error:(err:IAPIResponse)=>{
+        alert('Some API issue');
+      }
+    })
+  }
+
+  onUpdateCandidate(){
+    const formValue = this.newCandidatehObj.value;
+    this.candServ.updateCandidateServ(formValue).subscribe({
+      next:(result:IAPIResponse)=>{
+        alert(result.message);
+        this.closeModal();
+        this.loadCandidates();
+      },
+      error:(err:IAPIResponse)=>{
+        alert(err.message)
+      }
+    })
+  }
+
 openModal(){
     this.candidateModal.nativeElement.style.display='block';
   }

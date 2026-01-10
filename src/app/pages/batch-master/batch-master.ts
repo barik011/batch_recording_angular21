@@ -60,7 +60,8 @@ export class BatchMaster implements OnInit {
         this.batchList.set(result.data);
         alert(result.message);
         this.resetForm();
-        this.closeModal();        
+        this.closeModal();
+        this.loadAllBatches();        
       },
       error:(err:IAPIResponse)=>{
         alert(err.message);

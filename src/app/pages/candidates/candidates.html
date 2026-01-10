@@ -78,7 +78,7 @@
                         [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive?'Active':'Inactive'}}</span>
                 </td>
                 <td class="text-center action-icons">
-                    <i class="fa-solid fa-pen text-primary"></i>
+                    <i class="fa-solid fa-pen text-primary" (click)="onEditCandidate(item.candidateId)"></i>
                     <i class="fa-solid fa-trash text-danger"></i>
                 </td>
             </tr>
@@ -120,8 +120,8 @@
 <!-- RIGHT PANEL MODAL -->
 <div class="modal right-panel" #candidateModal>
     <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <form [formGroup]="newCandidatehObj">
+       
+            <form [formGroup]="newCandidatehObj" class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
                         <i class="fa-solid fa-user-plus me-2"></i> Candidate Form
@@ -136,22 +136,22 @@
                         <input type="text" class="form-control" name="fullName" formControlName="fullName">
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mt-2">
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" formControlName="email">
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mt-2">
                         <label class="form-label">Mobile Number</label>
                         <input type="text" class="form-control" name="mobileNumber" formControlName="mobileNumber">
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mt-2">
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control" name="password" formControlName="password">
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mt-2">
                         <label class="form-label">Role</label>
                         <select class="form-select" name="role" formControlName="role">
                             <option>Admin</option>
@@ -160,7 +160,7 @@
                         </select>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 mt-4">
                         <div class="form-check form-switch">
                             <input type="checkbox" class="form-check-input" name="isActive" formControlName="isActive"
                              />
@@ -172,11 +172,20 @@
 
                 <div class="modal-footer">
                     <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+                    @if (newCandidatehObj.controls['candidateId'].value==0) 
+                    {
                     <button type="button" class="btn btn-primary" (click)="onSaveCandidate()">
                         <i class="fa-solid fa-floppy-disk me-1"></i> Save
                     </button>
+                    }
+                    @else {
+                        <button type="button" class="btn btn-warning" (click)="onUpdateCandidate()">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Update
+                    </button>
+                    }
+                    
                 </div>
             </form>
-        </div>
+        
     </div>
 </div>

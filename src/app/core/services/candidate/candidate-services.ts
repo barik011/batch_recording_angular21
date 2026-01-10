@@ -19,5 +19,11 @@ export class CandidateServices {
   addCandidateServ(obj:CandidateModel):Observable<IAPIResponse>{
     return this.http.post<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.CANDIDATES,obj);
   }
+  getCandidateByIdServ(id:number):Observable<IAPIResponse>{
+    return this.http.get<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.CANDIDATES+'/'+id);
+  }
+  updateCandidateServ(obj:CandidateModel):Observable<IAPIResponse>{
+    return this.http.put<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.CANDIDATES+'/'+obj.candidateId,obj);
+  }
   
 }
