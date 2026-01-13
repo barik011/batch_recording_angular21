@@ -9,7 +9,9 @@ export const GlobalConstant = {
 
         CANDIDATES:'Candidates',
         BATCH_ENROLLMENT:'BatchEnrollments',
+        
         GET_ALL_ENROLLMENT:'GetAllEnrollment',
+        GET_ENROLLMENT_BY_ID:'getEnrollentById'
     }
     
 }

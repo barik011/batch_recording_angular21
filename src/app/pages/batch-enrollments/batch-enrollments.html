@@ -20,9 +20,8 @@
     <thead class="table-primary">
       <tr>
         <th>Sl No</th>
-        <th>Enrollment ID</th>
-        <th>Batch</th>
-        <th>Candidate</th>
+        <th>Batch Name</th>
+        <th>Name Candidate</th>
         <th>Enrollment Date</th>
         <th>Status</th>
         <th class="text-center">Action</th>
@@ -32,13 +31,12 @@
       @for (item of batchEnrollmentList(); track $index) {
       <tr>
         <td>{{$index +1}}</td>
-        <td>{{item.enrollmentId}}</td>
-        <td>{{item.batchId}}</td>
-        <td>{{item.candidateId}}</td>
+        <td>{{item.batchName}}</td>
+        <td>{{item.fullName}}</td>
         <td>{{item.enrollmentDate}}</td>
-        <td><span class="badge bg-success">{{item.isActive}}</span></td>
+        <td><span class="badge" [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive}}</span></td>
         <td class="text-center action-icons">
-          <i class="fa-solid fa-pen text-primary"></i>
+          <i class="fa-solid fa-pen text-primary" (click)="onEditEnrollment(item.enrollmentId)"></i>
           <i class="fa-solid fa-trash text-danger"></i>
         </td>
       </tr>}
@@ -81,12 +79,25 @@
         <div class="modal-body">
 
           <div class="mb-3">
-            <label class="form-label">Batch Id</label>
-            <input type="text" class="form-control" formControlName="batchId">
+            <label class="form-label">Batch Name</label>
+            <select class="form-select"  formControlName="batchId">
+              <option>--Select Batch--</option>
+              @for (item of batchList(); track $index)
+              {
+                <option [value]="item.batchId">{{item.batchName}}</option>
+              }
+              
+            </select>
           </div>
           <div class="mb-3">
-            <label class="form-label">Candidate Id</label>
-            <input type="text" class="form-control" formControlName="candidateId">
+            <label class="form-label">Candidate Name</label>
+            <select class="form-select"  formControlName="candidateId">
+              <option>--Select Candidate---</option>
+             @for (item of candidateList(); track $index)
+              {
+                <option [value]="item.candidateId">{{item.fullName}}</option>
+              }
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label">Enrollment Date</label>

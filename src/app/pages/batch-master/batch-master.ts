@@ -44,7 +44,7 @@ export class BatchMaster implements OnInit {
   }
   loadAllBatches(){
     debugger;
-    this.http.get(environment.API_URL + GlobalConstant.API_END_POINTS.BATCHES).subscribe({
+    this.batchServ.getAllBatchService().subscribe({
       next:(result:any)=>{
         this.batchList.set(result.data);
       },

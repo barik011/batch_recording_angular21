@@ -13,6 +13,10 @@ export class BatchServices {
 
   http = inject(HttpClient);
 
+  getAllBatchService():Observable<IAPIResponse>{
+    return this.http.get<IAPIResponse>(environment.API_URL + GlobalConstant.API_END_POINTS.BATCHES);
+  }
+
   addBatchService(obj:BatchModel):Observable<IAPIResponse>{
     return this.http.post<IAPIResponse>(environment.API_URL + GlobalConstant.API_END_POINTS.BATCHES,obj)
   }

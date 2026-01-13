@@ -5,7 +5,7 @@ import { BatchMaster } from './pages/batch-master/batch-master';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { authGuard } from './core/guards/auth-guard';
 import { Candidates } from './pages/candidates/candidates';
-import { BatchEnrollments } from './pages/enrollments/batch-enrollments/batch-enrollments';
+import { BatchEnrollments } from './pages/batch-enrollments/batch-enrollments';
 
 export const routes: Routes = [
     {
