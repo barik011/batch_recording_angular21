@@ -1,0 +1,148 @@
+<!-- MAIN -->
+<div class="container-fluid py-4">
+
+  <div class="page-header d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">
+      <i class="fa-solid fa-video me-2"></i> Session Recording Management
+    </h4>
+    <div class="d-flex gap-2">
+            <button class="btn btn-light btn-icon" (click)="onToggleView()"
+                [title]="toggleView ?'Card View':'Table View'">
+                <i class="fa-solid " [ngClass]="toggleView ?'fa-grip':'fa-table'"></i>
+            </button>
+            <button class="btn btn-warning" (click)="openModal()">
+                <i class="fa-solid fa-plus me-1"></i> Add Session
+            </button>
+        </div>
+   
+  </div>
+  @if(toggleView){
+<!-- TABLE VIEW -->
+  <table class="table table-hover bg-white shadow-sm rounded align-middle">
+    <thead class="table-primary">
+      <tr>
+        <th>Topic</th>
+        <th>Batch</th>
+        <th>Duration</th>
+        <th>Session Date</th>
+        <th>Order</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(item of sessionRecordList(); track $index){
+        <tr>
+        <td>{{item.topicName}}</td>
+        <td>{{item.batchName}}</td>
+        <td>{{item.durationInMinutes}}</td>
+        <td>{{item.sessionDate}}</td>
+        <td>{{item.displayOrder}}</td>
+        <td class="text-center action-icons">
+          <i class="fa-solid fa-pen text-primary"></i>
+          <i class="fa-solid fa-trash text-danger"></i>
+        </td>
+      </tr>
+      }
+      
+    </tbody>
+  </table>
+  }
+  @else {
+ <!-- CARD VIEW -->
+  <div class="row mt-4">
+    @for(item of sessionRecordList(); track $index){
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5>{{item.topicName}}</h5>
+          <p class="mb-1"><strong>Batch:</strong> {{item.batchName}}</p>
+          <p class="mb-1"><strong>Duration:</strong> {{item.durationInMinutes}}</p>
+          <p class="mb-2"><strong>Date:</strong> {{item.sessionDate}}</p>
+          <span class="badge bg-primary">Order: {{item.displayOrder}}</span>
+        </div>
+        <div class="card-footer bg-white text-end action-icons">
+          <i class="fa-solid fa-pen text-primary"></i>
+          <i class="fa-solid fa-trash text-danger"></i>
+        </div>
+      </div>
+    </div>
+  }
+  </div>
+  }
+  
+
+ 
+
+</div>
+
+<!-- RIGHT PANEL MODAL -->
+<div class="modal right-panel" #candidateModal>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fa-solid fa-video me-2"></i> Session Form
+        </h5>
+        <button class="btn-close" (click)="closeModal()"></button>
+      </div>
+    <form>
+      <div class="modal-body">
+        
+          <div class="mb-3">
+            <label class="form-label">Batch</label>
+            
+            <select class="form-select" id="batchId" [field]="sessionForm.batchId">
+              <option value="">--Select Batch--</option>
+            @for (item of batchList$ | async ; track $index) {
+              <option [value]="item.batchId">{{item.batchName}}</option>
+            }
+            </select>
+          
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Topic Name</label>
+            <input type="text" class="form-control" [field]="sessionForm.topicName">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Topic Description</label>
+            <textarea class="form-control" rows="3" [field]="sessionForm.topicDescription"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">YouTube Video ID</label>
+            <input type="text" class="form-control" [field]="sessionForm.youtubeVideoId">
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Duration (Minutes)</label>
+              <input type="number" class="form-control" [field]="sessionForm.durationInMinutes">
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Display Order</label>
+              <input type="number" class="form-control" [field]="sessionForm.displayOrder">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Session Date</label>
+            <input type="date" class="form-control" [field]="sessionForm.sessionDate">
+          </div>
+        
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+        <button class="btn btn-primary" (click)="onSaveSessionRecord()">
+          <i class="fa-solid fa-floppy-disk me-1"></i> Save
+        </button>
+      </div>
+</form>
+    </div>
+  </div>
+</div>
+

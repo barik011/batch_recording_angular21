@@ -6,6 +6,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { authGuard } from './core/guards/auth-guard';
 import { Candidates } from './pages/candidates/candidates';
 import { BatchEnrollments } from './pages/batch-enrollments/batch-enrollments';
+import { SessionRecording } from './pages/session-recording/session-recording';
 
 export const routes: Routes = [
     {
@@ -39,6 +40,11 @@ export const routes: Routes = [
             {
                 path:'enrollment',
                 component:BatchEnrollments,
+                canActivate:[authGuard]
+            },
+            {
+                path:'session-recording',
+                component:SessionRecording,
                 canActivate:[authGuard]
             }
         ]
