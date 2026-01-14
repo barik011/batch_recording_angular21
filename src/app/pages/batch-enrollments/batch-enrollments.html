@@ -37,7 +37,7 @@
         <td><span class="badge" [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive}}</span></td>
         <td class="text-center action-icons">
           <i class="fa-solid fa-pen text-primary" (click)="onEditEnrollment(item.enrollmentId)"></i>
-          <i class="fa-solid fa-trash text-danger"></i>
+          <i class="fa-solid fa-trash text-danger" (click)="onDeleteEnrollment(item.enrollmentId)"></i>
         </td>
       </tr>}
     </tbody>
@@ -46,20 +46,23 @@
   @else {
   <!-- CARD VIEW -->
   <div class="row mt-4">
-    <div class="col-md-4">
+    @for (item of batchEnrollmentList(); track $index) {
+      <div class="col-md-4">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h5>Angular Batch 2026</h5>
-          <p class="mb-1"><strong>Candidate:</strong> John Doe</p>
-          <p class="mb-1"><strong>Enrollment Date:</strong> 10-01-2026</p>
-          <span class="badge bg-success">Active</span>
+          <h5>{{item.batchName}}</h5>
+          <p class="mb-1"><strong>Candidate:</strong> {{item.fullName}}</p>
+          <p class="mb-1"><strong>Enrollment Date:</strong> {{item.enrollmentDate}}</p>
+          <span class="badge " [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive}}</span>
         </div>
         <div class="card-footer bg-white text-end action-icons">
-          <i class="fa-solid fa-pen text-primary"></i>
-          <i class="fa-solid fa-trash text-danger"></i>
+          <i class="fa-solid fa-pen text-primary" (click)="onEditEnrollment(item.enrollmentId)"></i>
+          <i class="fa-solid fa-trash text-danger" (click)="onDeleteEnrollment(item.enrollmentId)"></i>
         </div>
       </div>
     </div>
+    }
+    
   </div>
   }
 </div>
@@ -121,7 +124,7 @@
           </button>
           }
           @else {
-          <button type="button" class="btn btn-warning">
+          <button type="button" class="btn btn-warning" (click)="onUpdateEnrollment()">
             <i class="fa-solid fa-floppy-disk me-1"></i> Update
           </button>
           }

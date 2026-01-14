@@ -25,7 +25,10 @@ export class EnrollmentServices {
         return this.http.post<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.BATCH_ENROLLMENT,obj);
       }
       updateEnrollmentServ(obj:EnrollmentModel):Observable<IAPIResponse>{
-        return this.http.post<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.BATCH_ENROLLMENT,obj);
+        return this.http.put<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.BATCH_ENROLLMENT+'/'+obj.enrollmentId,obj);
+      }
+      deleteEnrollmentServ(id:number):Observable<IAPIResponse>{
+        return this.http.delete<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.BATCH_ENROLLMENT+'/'+ id);
       }
     
 }

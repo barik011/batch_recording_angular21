@@ -77,6 +77,7 @@ loadCandidates(){
       next:(result:IAPIResponse)=>{
         alert('Enrollment Created')
         this.loadBatchEnrollment();
+         this.closeModal();
       },
       error:(err:IAPIResponse)=>{
         alert('Some Issue on API Please Check')
@@ -99,15 +100,32 @@ loadCandidates(){
 onUpdateEnrollment(){
     debugger
     const formValue = this.newEnrollmentObj.value;
-    this.enrollServ.addEnrollmentServ(formValue).subscribe({
+    this.enrollServ.updateEnrollmentServ(formValue).subscribe({
       next:(result:IAPIResponse)=>{
-        alert('Enrollment Created')
+        alert('Enrollment Updated');
         this.loadBatchEnrollment();
+         this.closeModal();
       },
       error:(err:IAPIResponse)=>{
-        alert('Some Issue on API Please Check')
+        alert('Some Issue on API Please Check');
       }
     })
+  }
+  onDeleteEnrollment(id:number){
+    const isDelete = confirm('Are you sure to delete enrollment');
+    if(isDelete){
+      this.enrollServ.deleteEnrollmentServ(id).subscribe({
+      next:(result:IAPIResponse)=>{
+         this.loadBatchEnrollment();
+        alert('Enrollment Deleted');
+       
+      },
+      error:(err:IAPIResponse)=>{
+        alert('Some Issue on API Please Check');
+      }
+    })
+    }
+    
   }
 
   openModal(){
