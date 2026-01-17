@@ -92,8 +92,8 @@
           <div class="mb-3">
             <label class="form-label">Batch</label>
             
-            <select class="form-select" [field]="sessionForm.batchId">
-              <option value="">--Select Batch--</option>
+            <select class="form-select" [field]="sessionForm.batchId" >
+              <option>--Select Batch--</option>
             @for (item of batchList$ | async ; track $index) {
               <option [value]="item.batchId">{{item.batchName}}</option>
             }

@@ -1,6 +1,6 @@
-import { JsonPipe, NgClass } from '@angular/common';
+import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, Pipe, signal, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { GlobalConstant } from '../../core/constants/Global.constant';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { IAPIResponse } from '../../core/models/interfaces/Common.Model';
 
 @Component({
   selector: 'app-batch-master',
-  imports: [FormsModule, NgClass,JsonPipe],
+  imports: [FormsModule, NgClass,JsonPipe,NgIf],
   templateUrl: './batch-master.html',
   styleUrl: './batch-master.css',
 })

@@ -25,7 +25,7 @@ export class SessionRecording implements OnInit {
 
   newSessionRecord = signal<ISession>({
     sessionId: 0,
-    batchId: 0,
+    batchId: '',
     topicName: '',
     topicDescription: '',
     youtubeVideoId: '',
@@ -37,7 +37,7 @@ export class SessionRecording implements OnInit {
   });
 
   sessionForm = form(this.newSessionRecord,(schema)=>{
-    
+    required(schema.batchId,{message:'This field is required'}),
     required(schema.topicName,{message:'This field is required'}),
     required(schema.topicDescription,{message:'This field is required'}),
     minLength(schema.topicDescription,10,{message:'Min length 10 required'})

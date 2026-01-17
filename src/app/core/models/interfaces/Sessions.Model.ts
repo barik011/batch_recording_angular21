@@ -1,6 +1,6 @@
 export interface ISession {
   sessionId: number
-  batchId: number
+  batchId: string
   topicName: string
   topicDescription: string
   youtubeVideoId: string

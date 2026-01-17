@@ -32,7 +32,7 @@
         </thead>
         <tbody>
           @if(batchList().length!=0){
-            @for (item of batchList(); track $index) {
+          @for (item of batchList(); track $index) {
           <tr>
             <td>{{item.batchName}}</td>
             <td>{{item.description}}</td>
@@ -50,11 +50,11 @@
           }
           }
           @else {
-            <tr>
-              <td colspan="6"> No Data....</td>
-            </tr>
+          <tr>
+            <td colspan="6"> No Data....</td>
+          </tr>
           }
-          
+
         </tbody>
       </table>
     </div>
@@ -73,7 +73,8 @@
             </p>
             <p class="mb-1"><strong>Start:</strong> {{item.startDate}}</p>
             <p class="mb-2"><strong>End:</strong> {{item.endDate}}</p>
-            <span class="badge badge-status" [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive?'Active':'InActive'}}</span>
+            <span class="badge badge-status"
+              [ngClass]="item.isActive?'bg-success':'bg-warning'">{{item.isActive?'Active':'InActive'}}</span>
           </div>
           <div class="card-footer bg-white text-end action-icons">
             <i class="fa-solid fa-pen text-primary"></i>
@@ -101,7 +102,7 @@
           <i class="fa-solid fa-clipboard-list me-2"></i> Batch Form
         </h5>
         @if(batchID()!=0){
-          {{batchID() | json}}
+        {{batchID() | json}}
         }
         <button class="btn-close" (click)="closeModal()" data-bs-dismiss="modal">
         </button>
@@ -112,27 +113,51 @@
           <div class="row g-3">
             <div class="col-12">
               <label for="batchName" class="form-label">Batch Name</label>
-              <input type="text" name="batchName" class="form-control" [(ngModel)]="newBatchObj.batchName" placeholder="Enter batch name">
-            </div>            
+              <input type="text" name="batchName" #batchName="ngModel" required class="form-control"
+                [ngClass]="(batchName.touched && batchName.errors?.['required'])?'border-error':''"
+                [(ngModel)]="newBatchObj.batchName" placeholder="Enter batch name">
+                
+              @if(batchName.touched){
+              @if (batchName.errors?.['required']) {
+              <span class="text-danger">Field is required</span>
+              }
+              }
+
+            </div>
 
             <div class="col-12">
               <label class="form-label" for="startDate">Start Date</label>
-              <input type="datetime-local" name="startDate" class="form-control" [(ngModel)]="newBatchObj.startDate">
+              <input type="date" #startDate="ngModel" 
+              required name="startDate"  class="form-control" 
+               [ngClass]="(startDate.touched && startDate.invalid)?'border-error':''"
+                [(ngModel)]="newBatchObj.startDate" />
+             {{ startDate | json }}
+              <span class="text-danger" *ngIf="startDate.touched && startDate.errors?.['required']">Field is required</span>
+              
             </div>
 
             <div class="col-12">
               <label class="form-label" for="endDate">End Date</label>
-              <input type="datetime-local" name="endDate" class="form-control" [(ngModel)]="newBatchObj.endDate">
+              <input type="date" #endDate="ngModel" required name="endDate"
+               class="form-control" [ngClass]="(endDate.touched && endDate.errors?.['required'])?'border-error':''"
+                [(ngModel)]="newBatchObj.endDate">
+
+              @if(endDate.touched){
+              @if (endDate.errors?.['required']) {
+              <span class="text-danger">Field is required</span>
+              }
+              }
             </div>
 
             <div class="col-12">
               <label class="form-label" for="description">Description</label>
-              <textarea class="form-control" name="description" [(ngModel)]="newBatchObj.description" rows="3"></textarea>
+              <textarea class="form-control" name="description" [(ngModel)]="newBatchObj.description"
+                rows="3"></textarea>
             </div>
 
             <div class="col-12">
               <div class="form-check form-switch">
-                <input type="checkbox" class="form-check-input"  name="isActive" [(ngModel)]="newBatchObj.isActive" />
+                <input type="checkbox" class="form-check-input" name="isActive" [(ngModel)]="newBatchObj.isActive" />
                 <label class="form-check-label" for="isActive">Status</label>
               </div>
             </div>
@@ -144,18 +169,18 @@
       <div class="modal-footer">
         <button class="btn btn-secondary" (click)="resetForm()">Reset</button>
         @if (newBatchObj.batchId==0) {
-          <button class="btn btn-primary" (click)="onSaveBatch()">
+        <button class="btn btn-primary" (click)="onSaveBatch()">
           <i class="fa-solid fa-floppy-disk me-1"></i> Save
         </button>
         }
         @else {
-                
+
         <button class="btn btn-warning" (click)="updateBatchById()">
           <i class="fa-solid fa-floppy-disk me-1"></i> Update
         </button>
         }
-  
-        
+
+
       </div>
     </div>
   </div>
