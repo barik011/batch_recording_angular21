@@ -4,6 +4,7 @@ import { GlobalConstant } from '../../constants/Global.constant';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '../../models/interfaces/Common.Model';
+import { IGetSeesion, ISession } from '../../models/interfaces/Sessions.Model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,4 +15,7 @@ export class SessionRecordServices {
   getAllSessionRecordServ():Observable<IAPIResponse>{
     return this.http.get<IAPIResponse>(environment.API_URL+GlobalConstant.API_END_POINTS.BATCH_SESSIONS+'/'+GlobalConstant.API_END_POINTS.GET_ALL_SESSIONS_RECORDINGS)
   }
+  addSessionRecordServ(obj:ISession):Observable<IAPIResponse>{
+      return this.http.post<IAPIResponse>(environment.API_URL+GlobalConstant.API_END_POINTS.BATCH_SESSIONS,obj);
+    }
 }

@@ -1,11 +1,11 @@
 export interface ISession {
   sessionId: number
   batchId: number
-  topicName: ''
-  topicDescription: ''
-  youtubeVideoId: ''
-  durationInMinutes: ''
-  sessionDate: ''
+  topicName: string
+  topicDescription: string
+  youtubeVideoId: string
+  durationInMinutes: string
+  sessionDate: string
   displayOrder: number
   createdAt: Date
   updatedAt: Date

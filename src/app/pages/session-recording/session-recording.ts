@@ -37,7 +37,7 @@ export class SessionRecording implements OnInit {
   });
 
   sessionForm = form(this.newSessionRecord,(schema)=>{
-    required(schema.batchId,{message:'This field is required'}),
+    
     required(schema.topicName,{message:'This field is required'}),
     required(schema.topicDescription,{message:'This field is required'}),
     minLength(schema.topicDescription,10,{message:'Min length 10 required'})
@@ -45,6 +45,7 @@ export class SessionRecording implements OnInit {
 
   constructor() {
     this.batchList$ = this.batchSrv.getAllBatchService().pipe(map((rep: IAPIResponse) => rep.data));
+    debugger;
   }
 
   ngOnInit(): void {
@@ -64,9 +65,17 @@ export class SessionRecording implements OnInit {
   }
 
   onSaveSessionRecord(){
-    alert('Hi')
     debugger;
     const formValue=this.sessionForm().value();
+    this.sessionServ.addSessionRecordServ(formValue).subscribe({
+      next:(result:IAPIResponse)=>{
+        alert('Session Record Created')
+        this.loadSessionRecord();
+      },
+      error:(err:IAPIResponse)=>{
+        alert(err.message)
+      }
+    })
     
   }
 
