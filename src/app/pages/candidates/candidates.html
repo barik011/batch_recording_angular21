@@ -133,7 +133,11 @@
 
                     <div class="col-12">
                         <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" name="fullName" formControlName="fullName">
+                        <input type="text" class="form-control" required name="fullName" formControlName="fullName">
+                        @if (newCandidatehObj.controls['fullName'].errors?.['required']) {
+                            <span class="text-danger">This is required field</span>
+                        }
+
                     </div>
 
                     <div class="col-12 mt-2">

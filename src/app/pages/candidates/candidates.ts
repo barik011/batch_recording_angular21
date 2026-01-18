@@ -3,7 +3,7 @@ import { Component, ElementRef, inject, OnInit, signal, ViewChild, viewChild } f
 import { CandidateServices } from '../../core/services/candidate/candidate-services';
 import { CandidateModel } from '../../core/models/classes/Candidate.Model';
 import { IAPIResponse } from '../../core/models/interfaces/Common.Model';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-candidates',
@@ -31,11 +31,11 @@ ngOnInit(): void {
 candicateForm(){
   this.newCandidatehObj = new FormGroup({
         candidateId:new FormControl(0),
-        fullName:new FormControl(''),
-        email:new FormControl(''),
-        mobileNumber:new FormControl(''),
+        fullName:new FormControl('',[Validators.required,Validators.minLength(4)]),
+        email:new FormControl('',[Validators.required,Validators.pattern('^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$')]),
+        mobileNumber:new FormControl('',[Validators.required,Validators.pattern('^[6-9]\d{9}$')]),
         password:new FormControl(''),
-        role:new FormControl(''),
+        role:new FormControl('',[Validators.required]),
         isActive:new FormControl(false),
         createdAt:new FormControl(new Date()),
         updatedAt:new FormControl(new Date())
