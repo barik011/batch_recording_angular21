@@ -133,9 +133,12 @@
 
                     <div class="col-12">
                         <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" required name="fullName" formControlName="fullName">
+                        <input type="text" class="form-control" required name="fullName" minlength="4" formControlName="fullName">
                         @if (newCandidatehObj.controls['fullName'].errors?.['required']) {
                             <span class="text-danger">This is required field</span>
+                        }
+                        @if (newCandidatehObj.controls['fullName'].errors?.['minlength']) {
+                            <span class="text-danger">Min Character 4 is required</span>
                         }
 
                     </div>
