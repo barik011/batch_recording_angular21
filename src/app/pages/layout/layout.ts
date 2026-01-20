@@ -1,4 +1,4 @@
-import { NgStyle, NgClass } from '@angular/common';
+import { NgStyle, NgClass, AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import { UserServices } from '../../core/services/user/user-services';
@@ -7,7 +7,7 @@ import { CandidateModel } from '../../core/models/classes/Candidate.Model';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLinkWithHref],
+  imports: [RouterOutlet, RouterLinkWithHref, AsyncPipe, NgIf],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
@@ -17,7 +17,6 @@ export class Layout {
   userSrv = inject(UserServices)
   loggedInData:CandidateModel=new CandidateModel();
   constructor() {
-    this.loggedInData = this.userSrv.loggedData;
   }
 
   onLogOff() {
