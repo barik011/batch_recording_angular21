@@ -7,6 +7,8 @@ import { authGuard } from './core/guards/auth-guard';
 import { Candidates } from './pages/candidates/candidates';
 import { BatchEnrollments } from './pages/batch-enrollments/batch-enrollments';
 import { SessionRecording } from './pages/session-recording/session-recording';
+import { CandidateDashboard } from './pages/candidate-dashboard/candidate-dashboard';
+import { CandidateSessionRecording } from './pages/candidate-session-recording/candidate-session-recording';
 
 export const routes: Routes = [
     {
@@ -33,6 +35,11 @@ export const routes: Routes = [
                 canActivate:[authGuard]
             },
             {
+                path:'candidate-dashboard',
+                component:CandidateDashboard,
+                canActivate:[authGuard]
+            },
+            {
                 path:'candidate',
                 component:Candidates,
                 canActivate:[authGuard]
@@ -45,6 +52,12 @@ export const routes: Routes = [
             {
                 path:'session-recording',
                 component:SessionRecording,
+                canActivate:[authGuard]
+            }
+            ,
+            {
+                path:'candidate-recording',
+                component:CandidateSessionRecording,
                 canActivate:[authGuard]
             }
         ]

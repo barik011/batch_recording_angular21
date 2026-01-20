@@ -1,6 +1,8 @@
 import { NgStyle, NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet, RouterLinkWithHref } from '@angular/router';
+import { UserServices } from '../../core/services/user/user-services';
+import { CandidateModel } from '../../core/models/classes/Candidate.Model';
 
 
 @Component({
@@ -10,15 +12,12 @@ import { Router, RouterOutlet, RouterLinkWithHref } from '@angular/router';
   styleUrl: './layout.css',
 })
 export class Layout {
-  loggedInData: any;
   toggleLeftPanel:boolean=true;
   router = inject(Router);
-
+  userSrv = inject(UserServices)
+  loggedInData:CandidateModel=new CandidateModel();
   constructor() {
-    const localData = localStorage.getItem('batch32');
-    if (localData != null) {
-      this.loggedInData = JSON.parse(localData);
-    }
+    this.loggedInData = this.userSrv.loggedData;
   }
 
   onLogOff() {
