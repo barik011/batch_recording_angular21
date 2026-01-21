@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
               <ng-container *ngIf="userSrv.loggedDataBehSub$ | async as userDetail" >
-                @if(userDetail.role == 'Super Admin'){
+                @if(userDetail.role == roleEnum.SUPER_ADMIN_ROLE){
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="'/dashboard'">Dashboard</a>
                 </li>
@@ -37,7 +37,10 @@
                  
             </ul>
             <form class="d-flex gap-2 align-items-center">
-                <div>{{userSrv.loggedDataBehSub$| async }}</div>
+              <ng-container *ngIf="userSrv.loggedDataBehSub$ | async as userDetail" >
+                <div>{{userDetail.fullName }}</div>
+              </ng-container>
+                
                 <button class="btn btn-success" (click)="onLogOff()" type="button">Logout</button>
             </form>
         </div>

@@ -13,7 +13,7 @@ export class UserServices {
   constructor(){
     const localData = localStorage.getItem('batch32');
     if (localData != null) {
-      this.loggedData = JSON.parse(localData);
+      this.loggedDataBehSub$.next(JSON.parse(localData)) ;
     }
   }
   
