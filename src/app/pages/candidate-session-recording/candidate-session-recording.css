@@ -1,0 +1,65 @@
+
+    .sidebar-menu { padding: 15px; }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: background .3s;
+    }
+
+    .menu-item:hover { background: rgba(255,255,255,.1); }
+
+    .menu-item i { width: 28px; text-align: center; }
+    .menu-item span { transition: opacity .3s; }
+
+    #sidebarToggle:checked ~ .sidebar span { opacity: 0; }
+
+    /* ---------- MAIN ---------- */
+    .main-content {
+      margin-left: 260px;
+      padding: 24px;
+      transition: margin-left .3s ease;
+    }
+
+    #sidebarToggle:checked ~ .main-content { margin-left: 80px; }
+
+    .page-header {
+      background: linear-gradient(135deg,#0d6efd,#4c1d95);
+      color: white;
+      padding: 22px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+      margin-bottom: 30px;
+    }
+
+    /* ---------- CARDS ---------- */
+    .batch-card, .session-card {
+      border-radius: 18px;
+      transition: transform .3s ease, box-shadow .3s ease;
+      cursor: pointer;
+    }
+
+    .batch-card:hover, .session-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.2);
+    }
+
+    .batch-icon {
+      font-size: 40px;
+      color: #0d6efd;
+    }
+
+    .session-card i {
+      font-size: 22px;
+      color: #0d6efd;
+    }
+
+    .badge-duration {
+      background: #e0e7ff;
+      color: #1e3a8a;
+      font-weight: 500;
+    }
