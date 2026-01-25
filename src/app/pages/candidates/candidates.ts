@@ -19,6 +19,8 @@ candidateList= signal<CandidateModel[]>([])
 candServ = inject(CandidateServices);
 newCandidatehObj:FormGroup = new FormGroup({});
 
+activeLoader=signal<boolean>(true);
+
 constructor(){
   this.candicateForm();
 }
@@ -43,8 +45,10 @@ candicateForm(){
 }
   
   loadCandidates(){
+
     this.candServ.getAllCandidateServ().subscribe({
       next:(result:IAPIResponse)=>{
+        this.activeLoader.set(false);
         this.candidateList.set(result.data)
       },
       error:(err:IAPIResponse)=>{

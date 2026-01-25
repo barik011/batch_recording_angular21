@@ -30,7 +30,7 @@ export class Login {
         next: (result: any) => {
           debugger;
           localStorage.setItem(GlobalConstant.LOCAL_STORAGE_KEYS.LOCAL_KEY_LOGIN, JSON.stringify(result.data));
-          localStorage.setItem('batchToken',JSON.stringify(result.token));
+          localStorage.setItem('batchToken',result.token);
           this.router.navigateByUrl('dashboard');
         },
         error: (err: any) => {
