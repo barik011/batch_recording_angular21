@@ -86,13 +86,11 @@
         </h5>
         <button class="btn-close" (click)="closeModal()"></button>
       </div>
-    <form>
-      <div class="modal-body">
-        
+    <form [formGroup]="sessionForm">
+      <div class="modal-body">        
           <div class="mb-3">
-            <label class="form-label">Batch</label>
-            
-            <select class="form-select" [field]="sessionForm.batchId" >
+            <label class="form-label">Batch</label>            
+            <select class="form-select" >
               <option>--Select Batch--</option>
             @for (item of batchList$ | async ; track $index) {
               <option [value]="item.batchId">{{item.batchName}}</option>
@@ -103,34 +101,34 @@
 
           <div class="mb-3">
             <label class="form-label">Topic Name</label>
-            <input type="text" class="form-control" [field]="sessionForm.topicName">
+            <input type="text" class="form-control" name="topicName" formControlName="topicName">
           </div>
 
           <div class="mb-3">
             <label class="form-label">Topic Description</label>
-            <textarea class="form-control" rows="3" [field]="sessionForm.topicDescription"></textarea>
+            <textarea class="form-control" rows="3" name="topicDescription"  formControlName="topicDescription"></textarea>
           </div>
 
           <div class="mb-3">
             <label class="form-label">YouTube Video ID</label>
-            <input type="text" class="form-control" [field]="sessionForm.youtubeVideoId">
+            <input type="text" class="form-control" name="youtubeVideoId"  formControlName="youtubeVideoId">
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
               <label class="form-label">Duration (Minutes)</label>
-              <input type="number" class="form-control" [field]="sessionForm.durationInMinutes">
+              <input type="number" class="form-control" name="durationInMinutes"  formControlName="durationInMinutes">
             </div>
 
             <div class="col-md-6 mb-3">
               <label class="form-label">Display Order</label>
-              <input type="number" class="form-control" [field]="sessionForm.displayOrder">
+              <input type="number" class="form-control" name="displayOrder"  formControlName="displayOrder">
             </div>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Session Date</label>
-            <input type="date" class="form-control" [field]="sessionForm.sessionDate">
+            <input type="date" class="form-control" name="sessionDate"  formControlName="sessionDate">
           </div>
         
       </div>

@@ -129,8 +129,7 @@
               <input type="date" #startDate="ngModel" 
               required name="startDate"  class="form-control" 
                [ngClass]="(startDate.touched)?'border-error':''"
-                [(ngModel)]="newBatchObj.startDate" />
-                
+                [(ngModel)]="newBatchObj.startDate" />                
                 <span class="text-danger" *ngIf="startDate.touched && startDate.errors?.['required']">Field is required</span>
               
             </div>

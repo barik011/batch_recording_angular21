@@ -6,11 +6,11 @@ import { AsyncPipe, NgClass, NgFor } from '@angular/common';
 import { BatchServices } from '../../core/services/batch/batch-services';
 import { map, Observable } from 'rxjs';
 import { BatchModel } from '../../core/models/classes/Batch.Model';
-import { form, minLength, required, schema, validate, Field } from '@angular/forms/signals';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-session-recording',
-  imports: [NgClass, AsyncPipe, Field],
+  imports: [NgClass, AsyncPipe, ReactiveFormsModule],
   templateUrl: './session-recording.html',
   styleUrl: './session-recording.css',
 })
@@ -23,25 +23,43 @@ export class SessionRecording implements OnInit {
   batchSrv = inject(BatchServices);
   batchList$: Observable<BatchModel[]> = new Observable<BatchModel[]>();
 
-  newSessionRecord = signal<ISession>({
-    sessionId: 0,
-    batchId: '',
-    topicName: '',
-    topicDescription: '',
-    youtubeVideoId: '',
-    durationInMinutes: '',
-    sessionDate: '',
-    displayOrder: 0,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  });
+  sessionForm:FormGroup = new FormGroup({});
+  formBuilder = inject(FormBuilder);
+  
+  initializeForm(){
+    this.sessionForm = this.formBuilder.group({
+      sessionId: [0],
+      batchId: [0],
+      topicName: [''],
+      topicDescription: [''],
+      youtubeVideoId: [''],
+      durationInMinutes: 0,
+      sessionDate: [new Date],
+      displayOrder: [0],
+      createdAt: [new Date],
+      updatedAt: [new Date],
+    });
+  }
 
-  sessionForm = form(this.newSessionRecord,(schema)=>{
-    required(schema.batchId,{message:'This field is required'}),
-    required(schema.topicName,{message:'This field is required'}),
-    required(schema.topicDescription,{message:'This field is required'}),
-    minLength(schema.topicDescription,10,{message:'Min length 10 required'})
-  })
+  // newSessionRecord = signal<ISession>({
+  //   sessionId: 0,
+  //   batchId: '',
+  //   topicName: '',
+  //   topicDescription: '',
+  //   youtubeVideoId: '',
+  //   durationInMinutes: '',
+  //   sessionDate: '',
+  //   displayOrder: 0,
+  //   createdAt: new Date(),
+  //   updatedAt: new Date(),
+  // });
+
+  // sessionForm = form(this.newSessionRecord,(schema)=>{
+  //   required(schema.batchId,{message:'This field is required'}),
+  //   required(schema.topicName,{message:'This field is required'}),
+  //   required(schema.topicDescription,{message:'This field is required'}),
+  //   minLength(schema.topicDescription,10,{message:'Min length 10 required'})
+  // })
 
   constructor() {
     this.batchList$ = this.batchSrv.getAllBatchService().pipe(map((rep: IAPIResponse) => rep.data));
@@ -66,20 +84,21 @@ export class SessionRecording implements OnInit {
 
   onSaveSessionRecord(){
     debugger;
-    const formValue=this.sessionForm().value();
-    this.sessionServ.addSessionRecordServ(formValue).subscribe({
-      next:(result:IAPIResponse)=>{
-        alert('Session Record Created')
-        this.loadSessionRecord();
-      },
-      error:(err:IAPIResponse)=>{
-        alert(err.message)
-      }
-    })
+    // const formValue=this.sessionForm().value();
+    // this.sessionServ.addSessionRecordServ(formValue).subscribe({
+    //   next:(result:IAPIResponse)=>{
+    //     alert('Session Record Created')
+    //     this.loadSessionRecord();
+    //   },
+    //   error:(err:IAPIResponse)=>{
+    //     alert(err.message)
+    //   }
+    // })
     
   }
 
   openModal() {
+    alert('Called');
     this.candidateModal.nativeElement.style.display = 'block';
   }
   closeModal() {
