@@ -1,12 +1,12 @@
 import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { IGetSeesion, ISession } from '../../core/models/interfaces/Sessions.Model';
+import { IGetSeesion } from '../../core/models/interfaces/Sessions.Model';
 import { SessionRecordServices } from '../../core/services/sessions/session-record-services';
 import { IAPIResponse } from '../../core/models/interfaces/Common.Model';
 import { AsyncPipe, NgClass, NgFor } from '@angular/common';
 import { BatchServices } from '../../core/services/batch/batch-services';
 import { map, Observable } from 'rxjs';
 import { BatchModel } from '../../core/models/classes/Batch.Model';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-session-recording',
@@ -26,20 +26,7 @@ export class SessionRecording implements OnInit {
   sessionForm:FormGroup = new FormGroup({});
   formBuilder = inject(FormBuilder);
   
-  initializeForm(){
-    this.sessionForm = this.formBuilder.group({
-      sessionId: [0],
-      batchId: [0],
-      topicName: [''],
-      topicDescription: [''],
-      youtubeVideoId: [''],
-      durationInMinutes: 0,
-      sessionDate: [new Date],
-      displayOrder: [0],
-      createdAt: [new Date],
-      updatedAt: [new Date],
-    });
-  }
+  
 
   // newSessionRecord = signal<ISession>({
   //   sessionId: 0,
@@ -63,8 +50,24 @@ export class SessionRecording implements OnInit {
 
   constructor() {
     this.batchList$ = this.batchSrv.getAllBatchService().pipe(map((rep: IAPIResponse) => rep.data));
-    debugger;
+    this.initializeForm()
   }
+
+  initializeForm(){
+    this.sessionForm = this.formBuilder.group({
+      sessionId:[0],
+      batchId: [0],
+      topicName: [''],
+      topicDescription:[''],
+      youtubeVideoId: [''],
+      durationInMinutes: [0],
+      sessionDate: [new Date],
+      displayOrder: [0],
+      createdAt: [new Date],
+      updatedAt: [new Date],
+    });
+  }
+
 
   ngOnInit(): void {
     this.loadSessionRecord();
@@ -84,21 +87,22 @@ export class SessionRecording implements OnInit {
 
   onSaveSessionRecord(){
     debugger;
-    // const formValue=this.sessionForm().value();
-    // this.sessionServ.addSessionRecordServ(formValue).subscribe({
-    //   next:(result:IAPIResponse)=>{
-    //     alert('Session Record Created')
-    //     this.loadSessionRecord();
-    //   },
-    //   error:(err:IAPIResponse)=>{
-    //     alert(err.message)
-    //   }
-    // })
+    const formValue=this.sessionForm.value;
+    this.sessionServ.addSessionRecordServ(formValue).subscribe({
+      next:(result:IAPIResponse)=>{
+        alert('Session Record Created')
+        this.loadSessionRecord();
+        this.initializeForm();
+        this.closeModal();
+      },
+      error:(err:IAPIResponse)=>{
+        alert(err.message)
+      }
+    })
     
   }
 
   openModal() {
-    alert('Called');
     this.candidateModal.nativeElement.style.display = 'block';
   }
   closeModal() {
@@ -107,4 +111,5 @@ export class SessionRecording implements OnInit {
   onToggleView() {
     this.toggleView = !this.toggleView;
   }
+  
 }
