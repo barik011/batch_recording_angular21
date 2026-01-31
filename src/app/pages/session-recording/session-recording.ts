@@ -102,6 +102,16 @@ export class SessionRecording implements OnInit {
     
   }
 
+  onEditSession(id:number){
+    debugger;
+    this.sessionServ.getSessionRecordByIdServ(id).subscribe({
+        next:(result:IAPIResponse)=>{
+          this.openModal();
+        }
+    })
+
+  }
+
   openModal() {
     this.candidateModal.nativeElement.style.display = 'block';
   }

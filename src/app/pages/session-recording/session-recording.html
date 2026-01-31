@@ -38,7 +38,7 @@
         <td>{{item.sessionDate}}</td>
         <td>{{item.displayOrder}}</td>
         <td class="text-center action-icons">
-          <i class="fa-solid fa-pen text-primary"></i>
+          <i class="fa-solid fa-pen text-primary" (click)="onEditSession(item.sessionId)"></i>
           <i class="fa-solid fa-trash text-danger"></i>
         </td>
       </tr>
