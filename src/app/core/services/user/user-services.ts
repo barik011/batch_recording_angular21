@@ -11,6 +11,10 @@ export class UserServices {
 
   loggedDataBehSub$:BehaviorSubject<CandidateModel>=new BehaviorSubject<CandidateModel>(this.loggedData)
   constructor(){
+    
+  }
+
+  currentLoggedData(){
     const localData = localStorage.getItem('batch32');
     if (localData != null) {
       this.loggedDataBehSub$.next(JSON.parse(localData)) ;

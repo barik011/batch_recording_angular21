@@ -18,6 +18,7 @@ export class Layout {
   toggleLeftPanel:boolean=true;
   router = inject(Router);
   userSrv = inject(UserServices)
+  userLogdedSrv = inject(UserServices)
   loggedInData:CandidateModel=new CandidateModel();
 
   roleEnum=Roles;
@@ -25,6 +26,7 @@ export class Layout {
 
   constructor() {
     //this.loggedInData =this.userSrv.loggedDataBehSub$.pipe(map((resp:CandidateModel)=>resp.data))
+    this.userLogdedSrv.currentLoggedData();
   }
 
   onLogOff() {
