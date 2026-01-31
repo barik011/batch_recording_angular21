@@ -107,6 +107,7 @@ export class SessionRecording implements OnInit {
     this.sessionServ.getSessionRecordByIdServ(id).subscribe({
         next:(result:IAPIResponse)=>{
           this.openModal();
+          this.sessionForm.patchValue(result.data)
         }
     })
 

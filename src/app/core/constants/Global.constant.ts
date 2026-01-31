@@ -13,7 +13,7 @@ export const GlobalConstant = {
         GET_ENROLLMENT_BY_ID:'getEnrollentById',
         BATCH_SESSIONS:'BatchSessions',
         GET_ALL_SESSIONS_RECORDINGS:'GetAllSessionsRecordings',
-        GET_SESSIONS_RECORD_BY_ID:'GetSessionsRecordById'
+        GET_SESSIONS_RECORD_BY_ID:'getSesssionById?sessionId='
     }
     
 }
