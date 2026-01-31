@@ -23,10 +23,8 @@ export class SessionRecording implements OnInit {
   batchSrv = inject(BatchServices);
   batchList$: Observable<BatchModel[]> = new Observable<BatchModel[]>();
 
-  sessionForm:FormGroup = new FormGroup({});
+  sessionForm: FormGroup = new FormGroup({});
   formBuilder = inject(FormBuilder);
-  
-  
 
   // newSessionRecord = signal<ISession>({
   //   sessionId: 0,
@@ -50,24 +48,23 @@ export class SessionRecording implements OnInit {
 
   constructor() {
     this.batchList$ = this.batchSrv.getAllBatchService().pipe(map((rep: IAPIResponse) => rep.data));
-    this.initializeForm()
+    this.initializeForm();
   }
 
-  initializeForm(){
+  initializeForm() {
     this.sessionForm = this.formBuilder.group({
-      sessionId:[0],
+      sessionId: [0],
       batchId: [0],
       topicName: [''],
-      topicDescription:[''],
+      topicDescription: [''],
       youtubeVideoId: [''],
       durationInMinutes: [0],
-      sessionDate: [new Date],
+      sessionDate: [new Date()],
       displayOrder: [0],
-      createdAt: [new Date],
-      updatedAt: [new Date],
+      createdAt: [new Date()],
+      updatedAt: [new Date()],
     });
   }
-
 
   ngOnInit(): void {
     this.loadSessionRecord();
@@ -85,33 +82,64 @@ export class SessionRecording implements OnInit {
     });
   }
 
-  onSaveSessionRecord(){
+  onSaveSessionRecord() {
     debugger;
-    const formValue=this.sessionForm.value;
+    const formValue = this.sessionForm.value;
     this.sessionServ.addSessionRecordServ(formValue).subscribe({
-      next:(result:IAPIResponse)=>{
-        alert('Session Record Created')
+      next: (result: IAPIResponse) => {
+        alert('Session Record Created');
         this.loadSessionRecord();
         this.initializeForm();
         this.closeModal();
       },
+      error: (err: IAPIResponse) => {
+        alert(err.message);
+      },
+    });
+  }
+
+  onEditSession(id: number) {
+    debugger;
+    this.sessionServ.getSessionRecordByIdServ(id).subscribe({
+      next: (result: IAPIResponse) => {
+        debugger;
+        this.openModal();
+        this.sessionForm.patchValue(result.data);
+      },
+    });
+  }
+  onUpdateSessionRecord() {
+    const formValue = this.sessionForm.value;
+    this.sessionServ.updateSessionRecordServ(formValue).subscribe({
+      next: (result: IAPIResponse) => {
+        alert('Session Record Updated');
+        this.loadSessionRecord();
+        this.initializeForm();
+        this.closeModal();
+      },
+      error: (err: IAPIResponse) => {
+        alert(err.message);
+      },
+    });
+  }
+
+  onDeleteSession(id:number){
+    const isDelete=confirm('Are you sure to delete');
+    if(isDelete){
+      this.sessionServ.deleteSessionRecordServ(id).subscribe({
+      next:(res:IAPIResponse)=>{
+        alert(res.message);
+      },
       error:(err:IAPIResponse)=>{
-        alert(err.message)
+        alert(err.message);
       }
     })
+    }
     
   }
 
-  onEditSession(id:number){
-    debugger;
-    this.sessionServ.getSessionRecordByIdServ(id).subscribe({
-        next:(result:IAPIResponse)=>{
-          this.openModal();
-          this.sessionForm.patchValue(result.data)
-        }
-    })
 
-  }
+
 
   openModal() {
     this.candidateModal.nativeElement.style.display = 'block';
@@ -122,5 +150,4 @@ export class SessionRecording implements OnInit {
   onToggleView() {
     this.toggleView = !this.toggleView;
   }
-  
 }

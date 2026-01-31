@@ -39,7 +39,7 @@
         <td>{{item.displayOrder}}</td>
         <td class="text-center action-icons">
           <i class="fa-solid fa-pen text-primary" (click)="onEditSession(item.sessionId)"></i>
-          <i class="fa-solid fa-trash text-danger"></i>
+          <i class="fa-solid fa-trash text-danger" (click)="onDeleteSession(item.sessionId)"></i>
         </td>
       </tr>
       }
@@ -128,16 +128,25 @@
 
           <div class="mb-3">
             <label class="form-label">Session Date</label>
-            <input type="date" class="form-control" name="sessionDate"  formControlName="sessionDate">
+            <input type="datetime" class="form-control" name="sessionDate"  formControlName="sessionDate">
           </div>
         
       </div>
 
       <div class="modal-footer">
         <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+        @if(sessionForm.controls['sessionId'].value == 0){
         <button class="btn btn-primary" (click)="onSaveSessionRecord()">
           <i class="fa-solid fa-floppy-disk me-1"></i> Save
         </button>
+        }
+        @else {
+        <button class="btn btn-primary" (click)="onUpdateSessionRecord()">
+          <i class="fa-solid fa-floppy-disk me-1"></i> Update
+        </button>
+        }
+        
+        
       </div>
 </form>
     </div>
