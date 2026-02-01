@@ -61,8 +61,8 @@
           <span class="badge bg-primary">Order: {{item.displayOrder}}</span>
         </div>
         <div class="card-footer bg-white text-end action-icons">
-          <i class="fa-solid fa-pen text-primary"></i>
-          <i class="fa-solid fa-trash text-danger"></i>
+         <i class="fa-solid fa-pen text-primary" (click)="onEditSession(item.sessionId)"></i>
+          <i class="fa-solid fa-trash text-danger" (click)="onDeleteSession(item.sessionId)"></i>
         </div>
       </div>
     </div>
