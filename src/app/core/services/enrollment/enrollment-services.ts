@@ -31,8 +31,8 @@ export class EnrollmentServices {
         return this.http.delete<IAPIResponse>(environment.API_URL+ GlobalConstant.API_END_POINTS.BATCH_ENROLLMENT+'/'+ id);
       }
     
-      getBatchedEnrolledByCandidateId(){
+      getBatchedEnrolledByCandidateId(id:number){
         // 'https://feestracking.freeprojectapi.com/api/BatchSessions/by-batch/103'
-        return this.http.get()
+        return this.http.get<IAPIResponse>('https://feestracking.freeprojectapi.com/api/BatchSessions/by-batch/'+id);
       }
 }
