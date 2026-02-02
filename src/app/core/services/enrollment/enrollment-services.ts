@@ -32,7 +32,6 @@ export class EnrollmentServices {
       }
     
       getBatchedEnrolledByCandidateId(id:number){
-        // 'https://feestracking.freeprojectapi.com/api/BatchSessions/by-batch/103'
         return this.http.get<IAPIResponse>('https://feestracking.freeprojectapi.com/api/BatchSessions/by-batch/'+id);
       }
 }
