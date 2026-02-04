@@ -13,7 +13,7 @@ export const Controllers ={
         // GET_ALL_ENROLLMENT:'GetAllEnrollment',
         // GET_ENROLLMENT_BY_ID:'getEnrollentById',
         BATCH_SESSIONS:'BatchSessions',
-        GET_ALL_SESSIONS_RECORDINGS:'GetAllSessionsRecordings',
+        //GET_ALL_SESSIONS_RECORDINGS:'GetAllSessionsRecordings',
         GET_SESSIONS_RECORD_BY_ID:'getSesssionById?sessionId='
 }
 
@@ -28,6 +28,8 @@ export const METHOD_NAME = {
         },
         SESSION:{
                 GET_SESSION_BY_BATCH:'by-batch',
-                GET_ALL_RECORDING: 'GetAllSessionsRecordings'
+                GET_ALL_RECORDING: 'GetAllSessionsRecordings',
+                GET_RECORD_BY_ID:'getSesssionById?sessionId='
+
         }
 }

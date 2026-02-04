@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Controllers, GlobalConstant } from '../../constants/Global.constant';
+import { Controllers, GlobalConstant, METHOD_NAME } from '../../constants/Global.constant';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { IAPIResponse } from '../../models/interfaces/Common.Model';
@@ -13,14 +13,14 @@ export class SessionRecordServices {
   http=inject(HttpClient);
 
   getAllSessionRecordServ():Observable<IAPIResponse>{
-    return this.http.get<IAPIResponse>(environment.API_URL+Controllers.BATCH_SESSIONS+'/'+Controllers.GET_ALL_SESSIONS_RECORDINGS)
+    return this.http.get<IAPIResponse>(environment.API_URL+Controllers.BATCH_SESSIONS+'/'+METHOD_NAME.SESSION.GET_ALL_RECORDING)
   }
   addSessionRecordServ(obj:ISession):Observable<IAPIResponse>{
       return this.http.post<IAPIResponse>(environment.API_URL+Controllers.BATCH_SESSIONS,obj);
     }
 
     getSessionRecordByIdServ(id:number):Observable<IAPIResponse>{
-      return this.http.get<IAPIResponse>(environment.API_URL+Controllers.BATCH_SESSIONS+'/'+Controllers.GET_SESSIONS_RECORD_BY_ID+id);
+      return this.http.get<IAPIResponse>(environment.API_URL+Controllers.BATCH_SESSIONS+'/'+METHOD_NAME.SESSION.GET_RECORD_BY_ID+id);
     }
 
     updateSessionRecordServ(obj:ISession):Observable<IAPIResponse>{
