@@ -1,8 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { UserServices } from '../../core/services/user/user-services';
 import { CandidateModel } from '../../core/models/classes/Candidate.Model';
 import { BatchServices } from '../../core/services/batch/batch-services';
 import { EnrollmentServices } from '../../core/services/enrollment/enrollment-services';
+import { map } from 'rxjs';
+import { SessionRecordServices } from '../../core/services/sessions/session-record-services';
 
 @Component({
   selector: 'app-candidate-session-recording',
@@ -10,15 +12,45 @@ import { EnrollmentServices } from '../../core/services/enrollment/enrollment-se
   templateUrl: './candidate-session-recording.html',
   styleUrl: './candidate-session-recording.css',
 })
-export class CandidateSessionRecording {
-  userLoggedSrv = inject(UserServices);
+export class CandidateSessionRecording implements OnInit {
+  userSrv = inject(UserServices);
   enrolledBatchServ = inject(EnrollmentServices);
+  sessionRecordServ = inject(SessionRecordServices);
+  enrolledBatch=signal<any[]>([]);
+  sessionRecord= signal<any[]>([]);
 
-  constructor(){
-    const loggedData = this.userLoggedSrv.currentLoggedData()
+  constructor(){   
+     this.userSrv.loggedDataBehSub$.subscribe({
+      next:(res)=>{
+        this.getEnrolmentByCandidate(res.candidateId)
+      }
+    })
+    
+     
+  }
+  ngOnInit(): void {
   }
 
-  getEnrolmentByCandidate(){
-    this.enrolledBatchServ.getBatchedEnrolledByCandidateId(this.loggedData.c)
+  getEnrolmentByCandidate(candidateID:number){
+    debugger;
+    this.enrolledBatchServ.getBatchedEnrolledByCandidateId(candidateID).subscribe({
+      next:(result:any)=>{
+        debugger;
+        this.enrolledBatch.set(result.data);
+      },
+      error:(err:any)=>{
+        alert('Some Issue on Batch Enrolment');
+      }
+    })
+  }
+
+  sessionRecording(id:number){
+    debugger;
+    this.sessionRecordServ.getAllSessionRecordByBatchIdServ(id).subscribe({
+      next:(res:any)=>{
+        debugger;
+        this.sessionRecord.set(res.data);
+      }
+    })
   }
 }

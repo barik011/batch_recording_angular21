@@ -29,4 +29,8 @@ export class SessionRecordServices {
     deleteSessionRecordServ(id:number):Observable<IAPIResponse>{
       return this.http.delete<IAPIResponse>(environment.API_URL+Controllers.BATCH_SESSIONS+'/'+id);
     }
+
+    getAllSessionRecordByBatchIdServ(id:number):Observable<IAPIResponse>{
+    return this.http.get<IAPIResponse>(environment.API_URL+Controllers.BATCH_SESSIONS+'/'+METHOD_NAME.SESSION.GET_SESSION_BY_BATCH+'/'+id)
+  }
 }

@@ -32,6 +32,6 @@ export class EnrollmentServices {
       }
     //https://feestracking.freeprojectapi.com/api/BatchEnrollments/by-candidate/103
       getBatchedEnrolledByCandidateId(id:number){
-        return this.http.get<IAPIResponse>(environment.API_URL+ Controllers.BATCH_ENROLLMENT+'/'+METHOD_NAME.ENROLMENT.GET_ENROLLMENT_BY_CANDIDATE+id);
+        return this.http.get<IAPIResponse>(environment.API_URL+ Controllers.BATCH_ENROLLMENT+'/'+METHOD_NAME.ENROLMENT.GET_ENROLLMENT_BY_CANDIDATE+'/'+id);
       }
 }
