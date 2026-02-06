@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { UserServices } from '../../core/services/user/user-services';
 import { CandidateModel } from '../../core/models/classes/Candidate.Model';
 import { BatchServices } from '../../core/services/batch/batch-services';
@@ -18,6 +18,8 @@ export class CandidateSessionRecording implements OnInit {
   sessionRecordServ = inject(SessionRecordServices);
   enrolledBatch=signal<any[]>([]);
   sessionRecord= signal<any[]>([]);
+
+  @ViewChild('videoModal') videoModalRef!:ElementRef;
 
   constructor(){   
      this.userSrv.loggedDataBehSub$.subscribe({
@@ -55,6 +57,6 @@ export class CandidateSessionRecording implements OnInit {
   }
 
   openVideoModal(){
-    
+    this.videoModalRef.nativeElement.style.display = 'block';
   }
 }
