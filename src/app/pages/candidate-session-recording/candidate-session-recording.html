@@ -34,7 +34,7 @@
     <div class="row g-4">
       @for (item of sessionRecord(); track $index) {
         <div class="col-md-4">
-        <div class="card session-card shadow-sm">
+        <div class="card session-card shadow-sm" (click)="openVideoModal()">
           <div class="card-body">
             <h6>
               <i class="fa-solid fa-play-circle me-2"></i>

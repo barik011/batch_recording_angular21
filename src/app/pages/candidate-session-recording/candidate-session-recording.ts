@@ -53,4 +53,8 @@ export class CandidateSessionRecording implements OnInit {
       }
     })
   }
+
+  openVideoModal(){
+    
+  }
 }
