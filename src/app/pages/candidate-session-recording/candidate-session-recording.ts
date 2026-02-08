@@ -59,5 +59,10 @@ export class CandidateSessionRecording implements OnInit {
   openVideoModal(){
     alert('open Modal')
     this.videoModalRef.nativeElement.style.display = 'block';
+    this.videoModalRef.nativeElement.style.opacity = 1;
+  }
+  closeVideoModal(){
+    alert('open Modal')
+    this.videoModalRef.nativeElement.style.display = 'none';
   }
 }
