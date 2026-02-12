@@ -62,19 +62,19 @@
 
 
 <div class="modal fade" #videoModal>
-    <div class="modal-dialog">
-    
+    <div class="modal-dialog">    
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" (click)="closeVideoModal()">&times;</button>
           <h4 class="modal-title">Modal Header</h4>
+          <button type="button" class="close" (click)="closeVideoModal()">&nbsp;</button>
+          
         </div>
         <div class="modal-body">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/PogypVRUSUI?si=TCGXaeymIZYLp_DV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="closeVideoModal()">Close</button>
+          <button type="button" class="btn btn-success" (click)="closeVideoModal()">Close</button>
         </div>
       </div>
       

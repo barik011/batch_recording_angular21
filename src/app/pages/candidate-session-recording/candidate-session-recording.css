@@ -63,3 +63,8 @@
       color: #1e3a8a;
       font-weight: 500;
     }
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      align-items: center;
+    }
