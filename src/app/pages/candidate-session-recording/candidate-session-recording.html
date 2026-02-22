@@ -34,7 +34,7 @@
     <div class="row g-4">
       @for (item of sessionRecord(); track $index) {
         <div class="col-md-4">
-        <div class="card session-card shadow-sm" (click)="openVideoModal()">
+        <div class="card session-card shadow-sm" (click)="openVideoModal(item)">
           <div class="card-body">
             <h6>
               <i class="fa-solid fa-play-circle me-2"></i>
@@ -71,7 +71,7 @@
           
         </div>
         <div class="modal-body">
-          <iframe width="100%" height="415" src="https://www.youtube.com/embed/PogypVRUSUI?si=TCGXaeymIZYLp_DV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe *ngIf="videoUrl" width="100%" height="415" [src]="videoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" (click)="closeVideoModal()">Close</button>
