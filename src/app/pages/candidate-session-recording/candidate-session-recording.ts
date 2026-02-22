@@ -65,9 +65,10 @@ export class CandidateSessionRecording implements OnInit {
   }
 
   openVideoModal(sessionRecord:any){
+    debugger;
     // construct proper YouTube embed link
     const id = sessionRecord.youtubeVideoId || '';
-    const embed = `https://www.youtube.com/embed/${id}?autoplay=1`;
+    const embed = `${id}?autoplay=1`;
     // sanitize the URL so Angular will bind it to an iframe src
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embed);
 
