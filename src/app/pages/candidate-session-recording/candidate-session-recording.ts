@@ -64,17 +64,30 @@ export class CandidateSessionRecording implements OnInit {
     })
   }
 
-  openVideoModal(sessionRecord:any){
+  openVideoModal(url:string){
     debugger;
-    // construct proper YouTube embed link
-    const id = sessionRecord.youtubeVideoId || '';
-    const embed = `${id}`;
-    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embed);
+    const embed = this.extractYoutubeId(url);
+    if (!embed) {
+    alert('Invalid YouTube link – cannot play video');
+    return;
+  }
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${embed}`);
 
     // show modal
     this.videoModalRef.nativeElement.style.display = 'block';
     this.videoModalRef.nativeElement.style.opacity = 1;
+    
   }
+  getVideoId(url:string):string{
+    return url.split('v=')[1]?.split('&')[0];
+  }
+ private extractYoutubeId(url: string): string | null {
+  // covers watch?v=, youtu.be/, embed/, etc.
+  const regExp =
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/;
+  const match = url.match(regExp);
+  return match ? match[1] : null;
+}
   closeVideoModal(){
     // hide modal
     this.videoModalRef.nativeElement.style.display = 'none';
