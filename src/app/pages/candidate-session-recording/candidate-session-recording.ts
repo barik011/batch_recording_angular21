@@ -1,10 +1,7 @@
 import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { UserServices } from '../../core/services/user/user-services';
-import { CandidateModel } from '../../core/models/classes/Candidate.Model';
-import { BatchServices } from '../../core/services/batch/batch-services';
 import { EnrollmentServices } from '../../core/services/enrollment/enrollment-services';
-import { map } from 'rxjs';
 import { SessionRecordServices } from '../../core/services/sessions/session-record-services';
 
 @Component({
